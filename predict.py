@@ -30,7 +30,7 @@ test_dataset = fudandataset(testdata_root,train=False)
 testdataloader = torch.utils.data.DataLoader(test_dataset, batch_size=1, shuffle=True, 
                                               num_workers=4)
 num_classes = 4
-
+model = TheModelClass(*args, **kwargs)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = model.load_state_dict(torch.load('./model_checkpoint/fudanc0_model_399.pth'))
 model.eval()
