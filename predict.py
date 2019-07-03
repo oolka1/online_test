@@ -33,7 +33,7 @@ num_classes = 4
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = torch.load('./model_checkpoint/fudanc0_model_399.pth')
-model.eval（）
+model.eval()
 
 test_acc_all = []
 for j, data in enumerate(testdataloader):
