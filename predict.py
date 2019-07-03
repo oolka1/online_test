@@ -30,17 +30,17 @@ test_dataset = fudandataset(testdata_root,train=False)
 testdataloader = torch.utils.data.DataLoader(test_dataset, batch_size=1, shuffle=True, 
                                               num_workers=4)
 num_classes = 4
-classifier = UNet_Nested(n_classes = num_classes)
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-classifier.to(device)
-classifier.load_state_dict(torch.load(config.model))
+model = torch.load（'./model_checkpoint/fudanc0_model_399.pth')
+model.eval（）
 
 test_acc_all = []
 for j, data in enumerate(testdataloader):
     slices,label = data
     slices, label = slices.to(device), label.to(device)
-    classifier = classifier.eval()
-    pred = classifier(slices)
+    
+    pred = model(slices)
     
     indata = slices.cpu().numpy()
     inlabel = label.cpu().numpy()
