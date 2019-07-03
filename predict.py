@@ -30,17 +30,17 @@ test_dataset = fudandataset(testdata_root,train=False)
 testdataloader = torch.utils.data.DataLoader(test_dataset, batch_size=1, shuffle=True, 
                                               num_workers=4)
 num_classes = 4
-model = TheModelClass(*args, **kwargs)
+classifier = UNet_Nested(n_classes = num_classes)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model = model.load_state_dict(torch.load('./model_checkpoint/fudanc0_model_399.pth'))
-model.eval()
+classifier.to(device)
+classifier.load_state_dict(torch.load(config.model))
 
 test_acc_all = []
 for j, data in enumerate(testdataloader):
     slices,label = data
     slices, label = slices.to(device), label.to(device)
-    
-    pred = model(slices)
+    classifier = classifier.eval()
+    pred = classifier(slices)
     
     indata = slices.cpu().numpy()
     inlabel = label.cpu().numpy()
@@ -58,4 +58,3 @@ for j, data in enumerate(testdataloader):
                 % (j+1, test_acc))
     test_acc_all.append(test_acc)
 print(('mean test acc: %f') % (np.mean(test_acc_all)))
-    
