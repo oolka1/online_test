@@ -15,18 +15,11 @@ from Unet import UNet_Nested
 from PIL import Image
 from torchvision import transforms
 
-unloader = transforms.ToPILImage()
-def tensor_to_PIL(tensor):
-    image = tensor.cpu().clone()
-    image = image.squeeze(0)
-    image = unloader(image)
-    return image
 
-def mask_to_image(mask):
-    return Image.fromarray((mask * 255).astype(np.uint8))
+
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model', '-m', default='./model_checkpoint/fudanc0_model_4.pth', metavar='FILE',
+parser.add_argument('--model', '-m', default='./model_checkpoint/fudanc0_model_399.pth', metavar='FILE',
                         help="Specify the file in which is stored the model"
                              " (default : 'MODEL.pth')")
 config = parser.parse_args()
@@ -65,4 +58,3 @@ for j, data in enumerate(testdataloader):
                 % (j+1, test_acc))
     test_acc_all.append(test_acc)
 print(('mean test acc: %f') % (np.mean(test_acc_all)))
-    
