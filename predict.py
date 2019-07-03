@@ -15,7 +15,7 @@ from Unet import UNet_Nested
 from PIL import Image
 from torchvision import transforms
 
-unloader = transforms.ToPILImage()
+
 
 
 parser = argparse.ArgumentParser()
