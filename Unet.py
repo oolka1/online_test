@@ -2,6 +2,7 @@
 import _init_paths
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from layers import unetConv2, unetUp
 from utils import init_weights, count_param
 
@@ -15,7 +16,7 @@ class UNet_Nested(nn.Module):
         self.is_batchnorm = is_batchnorm
         self.is_ds = is_ds
 
-        filters = [48, 96, 192, 384, 768]
+        filters = [64,128, 256, 512,1024]
         filters = [int(x / self.feature_scale) for x in filters]
 
         # downsampling
@@ -25,6 +26,8 @@ class UNet_Nested(nn.Module):
         self.conv20 = unetConv2(filters[1], filters[2], self.is_batchnorm)
         self.conv30 = unetConv2(filters[2], filters[3], self.is_batchnorm)
         self.conv40 = unetConv2(filters[3], filters[4], self.is_batchnorm)
+        
+        
 
         # upsampling
         self.up_concat01 = unetUp(filters[1], filters[0], self.is_deconv)
@@ -89,9 +92,9 @@ class UNet_Nested(nn.Module):
         final = (final_1+final_2+final_3+final_4)/4
 
         if self.is_ds:
-            return final
-        else:
-            return final_4
+            return final	            
+        else:	        
+            return final_4           
 
 if __name__ == '__main__':
     print('#### Test Case ###')
@@ -102,4 +105,3 @@ if __name__ == '__main__':
     y = model(x)
     print('Output shape:',y.shape)
     print('UNet++ totoal parameters: %.2fM (%d)'%(param/1e6,param))
-
