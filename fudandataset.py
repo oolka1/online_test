@@ -138,9 +138,9 @@ class fudandataset(data.Dataset):
                         labels[labels==500]=2
                         labels[labels==600]=3
                         '''x=labels.shape[0]
-                        x=int(0.31*x)
-                        labels=labels[x:x+96,]
-                        labels=labels[:,x:x+96]'''
+                        x=int(0.25*x)
+                        labels=labels[x:x+128,]
+                        labels=labels[:,x:x+128]'''
                         self.test_labels.append(labels)
                 
                         
@@ -153,9 +153,9 @@ class fudandataset(data.Dataset):
                     for i in range(2,d):
                         data = copy.deepcopy(file_data1[:,:,i])
                         '''x=data.shape[0]
-                        x=int(0.31*x)
-                        data=data[x:x+96,]
-                        data=data[:,x:x+96]'''
+                        x=int(0.25*x)
+                        data=data[x:x+128,]
+                        data=data[:,x:x+128]'''
                         data=data.astype(np.float32)
                         max1=data.max()
                         max1=max1.astype(np.float32)
