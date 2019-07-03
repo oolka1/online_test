@@ -32,7 +32,7 @@ testdataloader = torch.utils.data.DataLoader(test_dataset, batch_size=1, shuffle
 num_classes = 4
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model = torch.load('./model_checkpoint/fudanc0_model_399.pth')
+model = model.load_state_dict(torch.load('./model_checkpoint/fudanc0_model_399.pth'))
 model.eval()
 
 test_acc_all = []
