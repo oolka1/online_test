@@ -22,7 +22,7 @@ raw = np.load("result/raw_0.npy")
 label[label==1]=200
 label[label==2]=500
 label[label==3]=600
-#mask1 = np.reshape(mask,(label.shape[1],label.shape[2]))
+mask1 = np.reshape(mask,(label.shape[1],label.shape[2]))
 mask1[mask1==1]=200
 mask1[mask1==2]=500
 mask1[mask1==3]=600

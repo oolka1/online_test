@@ -114,10 +114,10 @@ class fudandataset(data.Dataset):
                          label2[label2==600]=3
                          self.train_data.append(data2[:,:,np.newaxis].transpose(2,0,1))
                          self.train_labels.append(label2)'''
-            '''self.together=list(zip(self.train_data,self.train_labels))          
+            self.together=list(zip(self.train_data,self.train_labels))          
             random.shuffle(self.together)
             self.train_data,self.train_labels = zip(*self.together)
-            print(len(self.train_data))'''
+            print(len(self.train_data))
         else:
             print('loading test data ')
             self.test_data = [] 
@@ -139,8 +139,8 @@ class fudandataset(data.Dataset):
                         labels[labels==600]=3
                         x=labels.shape[0]
                         x=int(0.25*x)
-                        labels=labels[x:x+128,]
-                        labels=labels[:,x:x+128]
+                        labels=labels[x:x+256,]
+                        labels=labels[:,x:x+256]
                         self.test_labels.append(labels)
                 
                         
@@ -154,8 +154,8 @@ class fudandataset(data.Dataset):
                         data = copy.deepcopy(file_data1[:,:,i])
                         x=data.shape[0]
                         x=int(0.25*x)
-                        data=data[x:x+128,]
-                        data=data[:,x:x+128]
+                        data=data[x:x+256,]
+                        data=data[:,x:x+256]
                         data=data.astype(np.float32)
                         max1=data.max()
                         max1=max1.astype(np.float32)
@@ -180,3 +180,5 @@ class fudandataset(data.Dataset):
         else:
             return len(self.test_data)
                             
+                    
+            

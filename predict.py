@@ -11,11 +11,9 @@ import torch
 import torch.utils.data
 import numpy as np
 from fudandataset import fudandataset
-from Unet import UNet_Nested
+
 from PIL import Image
 from torchvision import transforms
-
-
 
 
 parser = argparse.ArgumentParser()
@@ -58,3 +56,4 @@ for j, data in enumerate(testdataloader):
                 % (j+1, test_acc))
     test_acc_all.append(test_acc)
 print(('mean test acc: %f') % (np.mean(test_acc_all)))
+    
